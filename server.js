@@ -15,5 +15,5 @@ app.get('/health', (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`Expense Tracker API running on http://[::1]:${PORT}`)
+  console.log(`Expense Tracker API running on http://localhost:${PORT}`)
 })
