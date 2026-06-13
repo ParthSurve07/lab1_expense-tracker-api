@@ -111,14 +111,60 @@ Without persistence, all application state disappears on restart. Databases allo
 
 ---
 
-## Upcoming
+## Part 3 — Domain Modeling and Schema Evolution
 
-* [ ] Part 3 — Data Modeling
-* [ ] User Management
-* [ ] Expense Management
-* [ ] Categories and Budgets
-* [ ] Reporting and Analytics
-* [ ] Validation and Error Handling
-* [ ] Testing
-* [ ] API Documentation
-* [ ] Production Readiness
+### Objective
+
+Design the first version of the expense tracker's domain model and understand how application requirements translate into database structures.
+
+### Why This Matters
+
+Backend development isn't just about writing APIs. It starts with understanding the business domain and designing data models that accurately represent it.
+
+### What Was Built
+
+* Designed the initial User model.
+* Designed the initial Expense model.
+* Established a one-to-many relationship between Users and Expenses.
+* Introduced enums for expense types.
+* Added timestamps for system events.
+* Used UUIDs as identifiers.
+* Configured cascade deletion between Users and Expenses.
+* Generated and inspected SQL migrations.
+* Applied migrations using Prisma.
+* Visualized the resulting database using Prisma Studio.
+
+### Concepts Explored
+
+* Domain modeling
+* Primary keys
+* UUIDs
+* Unique constraints
+* One-to-many relationships
+* Foreign keys
+* Referential actions
+* Enums
+* Decimal vs floating-point numbers for money
+* Business events vs system events
+* Schema evolution
+* Prisma-to-SQL translation
+
+### Questions to Think About
+
+* Why choose UUIDs over sequential IDs?
+* Why should money use Decimal instead of Float?
+* Why does the foreign key live in Expense instead of User?
+* Why is `expenseDate` different from `createdAt`?
+* When is cascade delete appropriate?
+* How does Prisma translate models into SQL constraints?
+* What changes if categories are introduced later?
+
+### Definition of Done
+
+* [x] User model designed and implemented
+* [x] Expense model designed and implemented
+* [x] Relationship established
+* [x] SQL migration generated and inspected
+* [x] Migration applied to PostgreSQL
+* [x] Database visualized using Prisma Studio
+* [x] Design decisions understood and justified

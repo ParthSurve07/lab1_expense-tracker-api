@@ -1,8 +1,35 @@
 generator client {
-  provider = "postgresql"
+  provider = "prisma-client"
   output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+model User {
+  id        String    @id @default(uuid())
+  name      String
+  email     String    @unique
+  expenses  Expense[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+enum ExpenseType {
+  INCOME
+  EXPENSE
+}
+
+model Expense {
+  id          String      @id @default(uuid())
+  name        String
+  userId      String
+  expenseType ExpenseType @default(EXPENSE)
+  amount      Decimal @db.Decimal(10, 2)
+  expenseDate DateTime
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
