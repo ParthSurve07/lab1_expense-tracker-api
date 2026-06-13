@@ -168,3 +168,120 @@ Backend development isn't just about writing APIs. It starts with understanding 
 * [x] Migration applied to PostgreSQL
 * [x] Database visualized using Prisma Studio
 * [x] Design decisions understood and justified
+
+---
+
+## Part 4 — User Management APIs
+
+### Objective
+
+Expose the first business functionality of the expense tracker by allowing clients to create and retrieve users through HTTP APIs.
+
+### Why This Matters
+
+A backend becomes useful only when external clients can interact with it. This part introduced the complete request → validation → database → response lifecycle.
+
+### What Was Built
+
+* User creation endpoint
+* Retrieve all users endpoint
+* Retrieve user by ID endpoint
+* Request body parsing using Express
+* Duplicate email handling
+* Basic application-level validation
+* Error handling for database operations
+* Manual API testing
+
+### APIs Implemented
+
+#### Create User
+
+`POST /api/users`
+
+Creates a new user.
+
+Behavior:
+
+* Requires `name` and `email`
+* Rejects requests with missing fields
+* Rejects duplicate email addresses
+* Returns the newly created user
+
+Status Codes:
+
+* `201 Created`
+* `400 Bad Request`
+* `409 Conflict`
+* `500 Internal Server Error`
+
+---
+
+#### Get All Users
+
+`GET /api/users`
+
+Returns all users currently stored in the system.
+
+Behavior:
+
+* Returns only user information
+* Does not include expenses to avoid unnecessary data fetching
+
+Status Codes:
+
+* `200 OK`
+* `500 Internal Server Error`
+
+---
+
+#### Get User By ID
+
+`GET /api/users/:id`
+
+Returns a specific user.
+
+Behavior:
+
+* Retrieves a user using their UUID
+* Returns an error when the user does not exist
+
+Status Codes:
+
+* `200 OK`
+* `404 Not Found`
+* `500 Internal Server Error`
+
+### Concepts Explored
+
+* REST fundamentals
+* HTTP methods
+* Route parameters
+* Request bodies
+* JSON parsing
+* HTTP status codes
+* Prisma Client usage
+* Application-level validation
+* Duplicate resource handling
+* Error handling
+* Overfetching considerations
+* Race conditions
+
+### Questions to Think About
+
+* Should validation happen in Express, Prisma, or the database?
+* Is checking for duplicate emails before insertion enough?
+* How should database constraint violations be handled?
+* When should routes be separated into their own modules?
+* What happens if two requests try to create the same user simultaneously?
+
+### Definition of Done
+
+* [x] Create user endpoint implemented
+* [x] Get all users endpoint implemented
+* [x] Get user by ID endpoint implemented
+* [x] Duplicate email handling added
+* [x] Appropriate status codes used
+* [x] Endpoints manually tested
+* [x] API behavior understood and justified
+
+---
